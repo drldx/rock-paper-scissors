@@ -1,7 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
-
 function getComputerChoice() {
   
   let random = Math.floor(Math.random() * 10);
@@ -24,42 +20,68 @@ function getHumanChoice() {
   return userChoice;
 }
 
-function playRound(humanChoice, computerChoice) {
-  const hC = humanChoice;
-  const cC = computerChoice;
 
- // console.log(`hc: ${hC}, cc: ${cC}`);
-
-  if (hC === cC) {
-    return "It's a tie!"; 
-  } else if ((hC === "Rock" && cC === "Paper")) {
-    computerScore++;
-    return `You lose! ${cC} beats ${hC}`; 
-
-  } else  if ((hC === "Rock" && cC === "Scissors")) {
-    humanScore++;
-    return `You won! ${hC} beats ${cC}`; 
-
-  } else if ((hC === "Paper" && cC === "Rock")) {
-    humanScore++;
-    return `You won! ${hC} beats ${cC}`; 
+function playGame(times) {
+  
+  let round = 0;
+  let humanScore = 0;
+  let computerScore = 0;
+  let ties = 0;
+  //console.log(playRound(humanSelection, computerSelection));
+  
+  while (times !== round) {
     
-  } else if ((hC === "Paper" && cC === "Scissors")) {
-    computerScore++;
-    return  `You lose! ${cC} beats ${hC}`;
+   const humanSelection = getHumanChoice();
+   const computerSelection = getComputerChoice();
 
-  }else if ((hC === "Scissors" && cC === "Rock")) {
-    computerScore++;
-    return  `You lose! ${cC} beats ${hC}`;
+   playRound(humanSelection, computerSelection);
+    times--;
+  }
 
-  } else if ((hC === "Scissors" && cC === "Paper")) {
-    humanScore++;
-    return  `You won! ${cC} beats ${hC}`;
+  function playRound(humanChoice, computerChoice) {
+    const hC = humanChoice;
+    const cC = computerChoice;
 
-  } 
+    console.log(`you: ${hC}, bot: ${cC}`);
+
+    if (hC === cC) {
+      ties++;
+      return "It's a tie!"; 
+    } else if ((hC === "Rock" && cC === "Paper")) {
+      computerScore++;
+      return //`You lose! ${cC} beats ${hC}`; 
+
+    } else  if ((hC === "Rock" && cC === "Scissors")) {
+      humanScore++;
+      return //`You won! ${hC} beats ${cC}`; 
+
+    } else if ((hC === "Paper" && cC === "Rock")) {
+      humanScore++;
+      return //`You won! ${hC} beats ${cC}`; 
+      
+    } else if ((hC === "Paper" && cC === "Scissors")) {
+      computerScore++;
+      return  //`You lose! ${cC} beats ${hC}`;
+
+    }else if ((hC === "Scissors" && cC === "Rock")) {
+      computerScore++;
+      return  //`You lose! ${cC} beats ${hC}`;
+
+    } else if ((hC === "Scissors" && cC === "Paper")) {
+      humanScore++;
+      return  //`You won! ${cC} beats ${hC}`;
+
+    } 
+  }
+
+  if(humanScore === computerScore) return `It's a tie: Score: ${humanScore} : ${computerScore}, ties: ${ties}`;
+  if(humanScore > computerScore) return `You won! Score: ${humanScore} : ${computerScore}, ties: ${ties}`;
+  if(humanScore < computerScore) return `You lose! Score: ${humanScore} : ${computerScore}, ties: ${ties}`;
+
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+let result = playGame(5);
+console.log(result);
 
-console.log(playRound(humanSelection, computerSelection));
+
+
