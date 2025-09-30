@@ -14,4 +14,10 @@ function getComputerChoice() {
 }
 console.log(getComputerChoice());
 
+function getHumanChoice() {
+  let choice = prompt("Input your choice: ", '').toLowerCase();
+  let userChoice = (choice[0].toUpperCase() + choice.slice(1));
+  return userChoice;
+}
+console.log(getHumanChoice());
 
